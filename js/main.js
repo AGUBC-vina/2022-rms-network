@@ -681,9 +681,18 @@ function toggleWell(siteCode, visible) {
     const sel = currentSelection;
     if (!sel) return;
     sel.visibility[siteCode] = visible;
+    const newVis = visible ? true : 'legendonly';
+
+    // Hydrograph (§5.3)
     const indices = sel.traceIndices[siteCode] || [];
     if (indices.length > 0) {
-        Plotly.restyle('plotly-chart', { visible: visible ? true : 'legendonly' }, indices);
+        Plotly.restyle('plotly-chart', { visible: newVis }, indices);
+    }
+
+    // Representativeness chart (§5.4) - same well's scatter points
+    const repIndices = (sel.repTraceIndices || {})[siteCode] || [];
+    if (repIndices.length > 0 && document.querySelector('#rep-chart .main-svg')) {
+        Plotly.restyle('rep-chart', { visible: newVis }, repIndices);
     }
 }
 
@@ -691,11 +700,20 @@ function toggleAllWells(visible) {
     const sel = currentSelection;
     if (!sel) return;
     Object.keys(sel.visibility).forEach((sc) => { sel.visibility[sc] = visible; });
-    const allIndices = [];
-    Object.values(sel.traceIndices).forEach((arr) => arr.forEach(i => allIndices.push(i)));
-    if (allIndices.length > 0) {
-        Plotly.restyle('plotly-chart', { visible: visible ? true : 'legendonly' }, allIndices);
+    const newVis = visible ? true : 'legendonly';
+
+    const allHydroIdx = [];
+    Object.values(sel.traceIndices).forEach((arr) => arr.forEach(i => allHydroIdx.push(i)));
+    if (allHydroIdx.length > 0) {
+        Plotly.restyle('plotly-chart', { visible: newVis }, allHydroIdx);
     }
+
+    const allRepIdx = [];
+    Object.values(sel.repTraceIndices || {}).forEach((arr) => arr.forEach(i => allRepIdx.push(i)));
+    if (allRepIdx.length > 0 && document.querySelector('#rep-chart .main-svg')) {
+        Plotly.restyle('rep-chart', { visible: newVis }, allRepIdx);
+    }
+
     document.querySelectorAll('input[data-well-toggle]').forEach((cb) => {
         cb.checked = visible;
     });
@@ -880,6 +898,8 @@ function renderRepresentativenessChart() {
 
     const traces = [];
     const allValues = [];
+    const repTraceIndices = {};   // wellKey -> [Plotly trace idx, ...]
+    let traceIdx = 0;
 
     sel.wellsWithColor.forEach(({ well, color }) => {
         if (wellKey(well) === wellKey(refWell)) return;
@@ -901,8 +921,13 @@ function renderRepresentativenessChart() {
             marker: { color, size: 7, line: { color: 'white', width: 1 } },
             customdata: pairs.map(p => p.ym),
             hovertemplate: `<b>${well.well_name}</b><br>%{customdata}<br>${refName}: %{x:.2f} ft<br>Test: %{y:.2f} ft<extra></extra>`,
+            visible: sel.visibility[wellKey(well)] ? true : 'legendonly',
         });
+        repTraceIndices[wellKey(well)] = [traceIdx];
+        traceIdx++;
     });
+
+    sel.repTraceIndices = repTraceIndices;
 
     const target = document.getElementById('rep-chart');
     if (!target) return;
