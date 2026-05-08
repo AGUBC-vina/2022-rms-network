@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vina Subbasin 2022 RMS Network Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1760px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: white;
+            padding: 20px;
+            border-bottom: 2px solid #ddd;
+            margin-bottom: 24px;
+        }
+
+        .header-inner {
+            max-width: 1760px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .header-text h1 {
+            font-size: 26px;
+            margin-bottom: 6px;
+        }
+
+        .header-text .subtitle {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .last-refresh {
+            background: white;
+            padding: 12px 16px;
+            border-radius: 6px;
+            border-left: 4px solid #1e40af;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            min-width: 220px;
+        }
+
+        .last-refresh .kpi-label {
+            font-size: 11px;
+            color: #666;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 4px;
+            letter-spacing: 0.04em;
+        }
+
+        .last-refresh .kpi-value {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1e40af;
+        }
+
+        .last-refresh .kpi-detail {
+            font-size: 11px;
+            color: #999;
+            margin-top: 2px;
+        }
+
+        section {
+            background: white;
+            padding: 25px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        section h2 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        section .section-intro {
+            margin-bottom: 15px;
+            color: #555;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        #map {
+            height: 860px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 900px) {
+            #map { height: 540px; }
+        }
+
+        .map-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            background: #fafafa;
+            border: 1px solid #e3e3e3;
+            border-radius: 4px;
+            padding: 8px 14px;
+            font-size: 12px;
+            margin: 0 0 8px 0;
+            color: #444;
+            align-items: center;
+        }
+
+        .map-legend .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .map-legend .legend-icon {
+            width: 22px;
+            height: 22px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cluster-marker {
+            position: relative;
+            width: 30px;
+            height: 30px;
+        }
+
+        .cluster-marker .cluster-badge {
+            position: absolute;
+            top: -7px;
+            right: -10px;
+            background: #d97706;
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+            min-width: 18px;
+            height: 18px;
+            line-height: 14px;
+            padding: 0 4px;
+            border-radius: 9px;
+            text-align: center;
+            border: 2px solid white;
+        }
+
+        .hl-ring {
+            position: relative;
+            width: 44px;
+            height: 44px;
+        }
+
+        .hl-ring .hl-ring-circle {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 3px solid var(--ring-color, #1e40af);
+        }
+
+        .hl-ring .hl-ring-badge {
+            position: absolute;
+            top: -4px;
+            right: -6px;
+            background: var(--ring-color, #1e40af);
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            min-width: 20px;
+            height: 20px;
+            line-height: 16px;
+            padding: 0 5px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid white;
+        }
+
+        .map-meta {
+            margin-top: 8px;
+            font-size: 13px;
+            color: #555;
+        }
+
+        .map-toggle-row {
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+
+        #hydrograph-container {
+            min-height: 200px;
+        }
+
+        #plotly-chart {
+            width: 100%;
+            height: 1100px;
+        }
+
+        @media (max-width: 900px) {
+            #plotly-chart { height: 600px; }
+        }
+
+        #rep-chart {
+            width: 100%;
+            height: 800px;
+        }
+
+        @media (max-width: 900px) {
+            #rep-chart { height: 520px; }
+        }
+
+        .rep-rms-select {
+            background: white;
+            color: #1e40af;
+            border: 1px solid #c7d6f5;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .hydro-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin: 10px 0 12px 0;
+            font-size: 13px;
+            color: #555;
+            flex-wrap: wrap;
+        }
+
+        .ctrl-btn {
+            background: #f0f5ff;
+            color: #1e40af;
+            border: 1px solid #c7d6f5;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .ctrl-btn:hover { background: #e3edff; }
+
+        th.sortable { cursor: pointer; user-select: none; }
+        th.sortable:hover { background: #ececec; }
+
+        th .sort-arrow {
+            display: inline-block;
+            margin-left: 4px;
+            color: #1e40af;
+            font-size: 11px;
+        }
+
+        th .sort-arrow.inactive { color: #ccc; }
+
+        td.show-col, th.show-col {
+            text-align: center;
+            width: 56px;
+        }
+
+        td.show-col input[type="checkbox"] {
+            cursor: pointer;
+            transform: scale(1.15);
+        }
+
+        .selected-polygon-header {
+            margin-bottom: 14px;
+            padding: 12px 14px;
+            background: #f0f5ff;
+            border-left: 4px solid #1e40af;
+            border-radius: 4px;
+        }
+
+        .selected-polygon-header h3 {
+            font-size: 17px;
+            margin-bottom: 4px;
+        }
+
+        .selected-polygon-header .meta {
+            font-size: 13px;
+            color: #555;
+        }
+
+        .selected-polygon-header .smc-line {
+            margin-top: 4px;
+            font-size: 12px;
+            color: #444;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: #999;
+            padding: 40px 20px;
+            font-size: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+            font-size: 13px;
+        }
+
+        th, td {
+            padding: 9px 10px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+        }
+
+        th {
+            background: #f5f5f5;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            color: #555;
+        }
+
+        tr:hover { background: #f9f9f9; }
+
+        .well-name-cell {
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .color-swatch {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        .pill {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-right: 3px;
+        }
+
+        .pill-rms      { background: #e3f2fd; color: #1e40af; }
+        .pill-supp     { background: #f0f0f0; color: #555; }
+        .pill-cont     { background: #e8f5e9; color: #2e7d32; }
+        .pill-flag     { background: #fff3cd; color: #856404; }
+        .pill-nested   { background: #fff7ed; color: #c2410c; border: 1px solid #fed7aa; }
+
+        footer {
+            background: #f5f5f5;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            margin-top: 30px;
+            border-top: 1px solid #ddd;
+        }
+
+        a { color: #1e40af; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-inner">
+            <div class="header-text">
+                <h1>Vina Subbasin 2022 RMS Network Dashboard</h1>
+                <p class="subtitle">Groundwater elevation monitoring for the Vina Subbasin (DWR basin 5-021.57) &mdash; 2022 GSP RMS network with revised polygon boundaries.</p>
+            </div>
+            <div class="last-refresh">
+                <div class="kpi-label">Last DWR Refresh</div>
+                <div class="kpi-value" id="refresh-time">Loading...</div>
+                <div class="kpi-detail">CKAN periodic measurements</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section>
+            <h2>5.2 Interactive Map</h2>
+            <p class="section-intro">
+                <strong>Click any RMS zone polygon</strong> to view a comparison hydrograph of every monitoring well inside that zone (Section 5.3 below).
+                Polygons are colored by Management Area
+                (<span style="color:#1f4ee0; font-weight:600;">North</span>,
+                <span style="color:#2ca02c; font-weight:600;">South</span>,
+                <span style="color:#e07b1f; font-weight:600;">Chico</span>).
+                The 17 wells designated as <strong>2022 GWL RMS</strong> in the GSP are shown as larger blue circles; supplemental monitoring wells are smaller gray dots.
+            </p>
+
+            <div class="map-legend">
+                <div class="legend-item">
+                    <span class="legend-icon">
+                        <svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="8" fill="#1e40af" stroke="white" stroke-width="2"/><circle cx="11" cy="11" r="3.2" fill="white"/></svg>
+                    </span>
+                    <span><strong>2022 GWL RMS</strong> &mdash; large blue circle</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-icon">
+                        <svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="6" fill="#888" stroke="white" stroke-width="2"/></svg>
+                    </span>
+                    <span>Supplemental &mdash; small gray dot</span>
+                </div>
+                <div class="legend-item" style="margin-left:auto;">
+                    <span style="display:inline-block; width:14px; height:14px; background:#d97706; border-radius:50%; color:white; text-align:center; font-size:9px; font-weight:700; line-height:14px;">3</span>
+                    <span>Multi-well (nested) site count</span>
+                </div>
+            </div>
+
+            <div class="map-toggle-row">
+                <label><input type="checkbox" id="polygon-toggle" checked> Show RMS zone polygons</label>
+            </div>
+            <div id="map"></div>
+            <div class="map-meta">
+                <strong>Total wells:</strong> <span id="well-count">Loading...</span>
+                | <strong>2022 GWL RMS:</strong> <span id="rms-count">Loading...</span>
+                | <strong>Continuous (hourly):</strong> <span id="cont-count">Loading...</span>
+                | <strong>RMS zone polygons:</strong> <span id="polygon-count">13</span>
+            </div>
+        </section>
+
+        <section>
+            <h2>5.3 Polygon Hydrograph &amp; Well Detail</h2>
+            <p class="section-intro">
+                Comparison hydrograph of all wells within the selected RMS zone polygon. For each <strong>2022 GWL RMS</strong> well in the polygon, the GSP's per-well
+                <strong style="color:#c62828;">MT</strong>,
+                <strong style="color:#2e7d32;">MO</strong>, and
+                <strong style="color:#6a1b9a;">IM-2027</strong>
+                threshold lines are drawn (labeled by State Well Number). Drought periods (1991&ndash;93, 2012&ndash;15, 2020&ndash;22) are shaded in orange.
+            </p>
+            <p class="section-intro">
+                <strong>Nested completions:</strong> some monitoring sites have multiple wells at one location screened at different depths (e.g., the four CWSCH wells in Chico).
+                On the map, those sites appear as a single marker with a count badge.
+                In the table below, look for the orange <span class="pill pill-nested">Nested &times;N</span> tag next to the well name.
+                The hydrograph plots each completion separately so you can compare shallow vs. deep aquifer response.
+            </p>
+            <div id="hydrograph-container">
+                <div class="empty-state">Click a polygon on the map above to view hydrographs for the wells in that zone.</div>
+            </div>
+        </section>
+
+        <section>
+            <h2>5.4 Representativeness Comparison</h2>
+            <p class="section-intro">
+                For each <strong>test well</strong> in the polygon, paired same-month water-level readings are plotted against the <strong>2022 GWL RMS well's</strong> reading for the same month.
+                Points falling close to the dashed <strong>1:1 line</strong> indicate the RMS well is representative of that test well; scatter away from the line shows greater deviation.
+                Each trace's legend label includes the number of paired observations (<em>n</em>) and the Pearson R&sup2; (when n &ge; 5).
+                If a polygon has more than one RMS well (Chico has five), use the dropdown to switch which RMS is the reference.
+            </p>
+            <div id="rep-content">
+                <div class="empty-state">Click a polygon on the map above to view the representativeness comparison.</div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>Vina Subbasin 2022 RMS Network Dashboard | Built with Leaflet &amp; Plotly</p>
+        <p>Sources: California DWR SGMA Data Viewer (CKAN periodic measurements) | 2022 Vina GSA GSP Appendix 3B (RMS polygon network) | 2026-05-02 monitoring network spreadsheet</p>
+    </footer>
+
+    <script src="js/wells-data.js"></script>
+    <script src="js/measurements-data.js"></script>
+    <script src="js/polygons-data.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+name: Daily Data Refresh
+
+on:
+  # Daily at 5am Pacific (noon UTC, after DWR's overnight processing).
+  schedule:
+    - cron: '0 12 * * *'
+  # Manual trigger from the Actions tab.
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh-data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python deps
+        run: python3 -m pip install --upgrade openpyxl
+
+      - name: Fetch DWR data
+        run: python3 scripts/fetch_dwr_data.py
+
+      - name: Commit and push if data changed
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add js/measurements-data.js js/wells-data.js
+          if git diff --staged --quiet; then
+            echo "No data changes — skipping commit"
+          else
+            git commit -m "Auto-refresh DWR data ($(date -u +'%Y-%m-%d %H:%M UTC'))"
+            git push
+          fi

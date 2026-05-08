@@ -1,0 +1,81 @@
+well_name,swn,site_code,mgmt_area_full,mgmt_area,well_depth,is_2022_gwl_rms,is_2026_gwl_rms,is_2026_isw_rms,well_use,well_type,basin,wcr_no,latitude,longitude,monitor_freq,multi_completion,gse,rpe,screen_intervals,tag_notes,mt_ft,mo_ft,im_2027_ft
+22N01W05M001M,22N01W05M001M,397871N1220100W001,01-Vina-North,North,200.0,True,True,False,Irrigation,Single Well,Vina,,39.78711,-122.01,Hourly,False,151.48,153.28,,,31,115,116.0
+23N01E07H001M,23N01E07H001M,398648N1219049W002,01-Vina-North,North,195.0,True,True,False,Residential,Single Well,Vina,393242,39.86482,-121.90494,Quarterly,False,282.0,283.0,115-195,,72,136,140.0
+23N01E33A001M,23N01E33A001M,398097N1218630W001,01-Vina-North,North,506.0,True,False,False,Irrigation,Single Well,Vina,4060,39.8097,-121.86305,Quarterly,False,252.34,252.34,53-506,,72,125,128.0
+23N01W10E001M,23N01W10E001M,398640N1219723W001,01-Vina-North,North,668.0,True,False,False,Irrigation,Single Well,Vina,42600,39.864,-121.97237,Quarterly,False,189.38,190.68,600-668,,80,136,137.0
+23N01W36P001M,23N01W36P001M,397972N1219297W001,01-Vina-North,North,165.0,True,True,True,Residential,Single Well,Vina,,39.7972,-121.9297,Quarterly,False,162.75,164.35,,,45,108,110.0
+23N02W25C001M,23N02W25C001M,398222N1220401W001,01-Vina-North,North,243.0,True,True,False,Irrigation,Single Well,Vina,,39.8222,-122.0401,Quarterly,False,157.4,161.2,,,50,130,130.0
+22N01E20K001M,22N01E20K001M,397445N1218905W001,01-Vina-North,North,110.0,False,False,False,Residential,Single Well,Vina,,39.7445,-121.8905,Quarterly,False,167.84,168.34,,,,,
+23N01E29P002M,23N01E29P002M,398133N1218913W001,01-Vina-North,North,265.0,False,True,False,Irrigation,Single Well,Vina,265103,39.81332,-121.89133,Quarterly,False,205.34,206.34,,,,,
+23N01W03H002M,23N01W03H002M,398782N1219570W001,01-Vina-North,North,553.0,False,False,False,Observation,Part of a nested/multi-completion well,Vina,e0136941,39.87822,-121.95712,Hourly,True,216.88,218.84,510-540,,,,
+23N01W03H003M,23N01W03H003M,398782N1219570W002,01-Vina-North,North,351.0,False,False,False,Observation,Part of a nested/multi-completion well,Vina,e0136941,39.87822,-121.95712,Hourly,True,216.88,219.01,320-340,,,,
+23N01W03H004M,23N01W03H004M,398782N1219570W003,01-Vina-North,North,115.0,False,True,True,Observation,Part of a nested/multi-completion well,Vina,e0136941,39.87822,-121.95712,Hourly,True,216.88,219.32,70-100,"ISW yes, DW no. not near DW cluster. 2012 vs 1947 records. Should be 23N01W09E001M.",,,
+23N01W09E001M,23N01W09E001M,398651N1219930W001,01-Vina-North,North,110.0,False,False,True,Irrigation,Single Well,Vina,141927,39.8651,-121.993,Quarterly,False,183.39,183.89,,,,,
+23N01W10M001M,23N01W10M001M,398619N1219746W001,01-Vina-North,North,220.0,False,False,False,Observation,Single Well,Vina,782040,39.86194,-121.97455,Hourly,False,187.38,190.28,90-100; 190-200,,,,
+23N01W14R002M,23N01W14R002M,398411N1219399W001,01-Vina-North,North,183.0,False,False,False,Irrigation,Single Well,Vina,215535,39.84105,-121.93992,Quarterly,False,191.36,193.36,,,,,
+23N01W16E001M,23N01W16E001M,398501N1219934W001,01-Vina-North,North,365.0,False,False,False,Irrigation,Single Well,Vina,68717,39.8501,-121.9934,Quarterly,False,172.38,173.18,97-112; 131-151; 244-256,,,,
+23N01W25G001M,23N01W25G001M,398223N1219276W001,01-Vina-North,North,660.0,False,False,False,Irrigation,Single Well,Vina,513092,39.8223,-121.9276,Quarterly,False,180.35,180.45,160-200; 320-340; 520-660,,,,
+23N01W27L001M,23N01W27L001M,398180N1219669W001,01-Vina-North,North,102.0,False,False,False,Residential,Single Well,Vina,57350,39.818,-121.9669,Quarterly,False,162.37,163.37,65-102,,,,
+23N01W28M002M,23N01W28M002M,398188N1219912W001,01-Vina-North,North,1044.0,False,False,False,Observation,Part of a nested/multi-completion well,Vina,WCR2008-008951,39.81877,-121.99119,Hourly,True,159.02,160.33,791-801; 881-891; 951-961; 1011-1021,,,,
+23N01W28M003M,23N01W28M003M,398188N1219912W002,01-Vina-North,North,696.0,False,False,False,Observation,Part of a nested/multi-completion well,Vina,WCR2008-008951,39.81877,-121.99119,Hourly,True,159.02,160.57,640-650; 660-670,,,,
+23N01W28M004M,23N01W28M004M,398188N1219912W003,01-Vina-North,North,207.0,False,True,False,Observation,Part of a nested/multi-completion well,Vina,WCR2008-008951,39.81877,-121.99119,Hourly,True,159.02,160.7,120-130; 155-165,,,,
+23N01W28M005M,23N01W28M005M,398188N1219912W004,01-Vina-North,North,72.0,False,False,True,Observation,Part of a nested/multi-completion well,Vina,WCR2008-008951,39.81877,-121.99119,Hourly,True,159.02,161.05,30-50,,,,
+23N01W31M001M,23N01W31M001M,398028N1220294W001,01-Vina-North,North,1200.0,False,False,False,Observation,Part of a nested/multi-completion well,Vina,WCR2008-008472,39.8028,-122.0294,Hourly,True,154.75,162.86,969-979; 1020-1030,,,,
+23N01W31M002M,23N01W31M002M,398028N1220294W002,01-Vina-North,North,616.0,False,False,False,Observation,Part of a nested/multi-completion well,Vina,WCR2008-008472,39.8028,-122.0294,Hourly,True,154.75,162.76,545-555; 590-600,,,,
+23N01W31M003M,23N01W31M003M,398028N1220294W003,01-Vina-North,North,245.0,False,False,False,Observation,Part of a nested/multi-completion well,Vina,WCR2008-008472,39.8028,-122.0294,Hourly,True,154.75,162.68,140-150; 191-201,,,,
+23N01W31M004M,23N01W31M004M,398028N1220294W004,01-Vina-North,North,106.0,False,False,True,Observation,Part of a nested/multi-completion well,Vina,WCR2008-008472,39.8028,-122.0294,Hourly,True,154.75,162.58,66-76,,,,
+TNC-MW-1,,,01-Vina-North,North,70.0,False,False,True,Observation,,Vina,,39.7255,-121.9449,,False,,,,,,,
+FC-MW-2,,,01-Vina-North,North,40.0,False,False,True,Observation,,Vina,,39.7355,-121.8348,,False,,,,,,,
+22N01E28J003M,22N01E28J003M,397317N1218649W002,02-Vina-Chico,Chico,320.0,True,True,False,Observation,Part of a nested/multi-completion well,Vina,WCR2023-000034,39.73168,-121.86499,Quarterly,True,178.29,179.79,200-279,,85,111,113.0
+CWSCH01b,CWSCH01b,397284N1218374W001,02-Vina-Chico,Chico,,True,True,False,Public Supply,Single Well,Vina,,39.72849,-121.83748,Tri-annually,False,200.0,203.0,,,85,106,107.0
+CWSCH02,CWSCH02,397284N1218374W002,02-Vina-Chico,Chico,,True,True,False,Public Supply,Single Well,Vina,,39.72849,-121.83748,Tri-annually,False,183.0,185.0,,,85,105,108.0
+CWSCH03,CWSCH03,397284N1218374W003,02-Vina-Chico,Chico,,True,True,False,Public Supply,Single Well,Vina,,39.72849,-121.83748,Tri-annually,False,260.0,260.0,,,85,108,109.0
+CWSCH07,CWSCH07,397284N1218374W004,02-Vina-Chico,Chico,,True,True,False,Public Supply,Single Well,Vina,,39.72849,-121.83748,Tri-annually,False,266.0,268.0,,,85,95,97.0
+22N01E09B001M,22N01E09B001M,397818N1218718W001,02-Vina-Chico,Chico,156.0,False,False,False,Residential,Single Well,Vina,89182,39.7818,-121.8718,Quarterly,False,178.33,179.53,84-156,,,,
+22N01E28J001M,22N01E28J001M,397317N1218649W001,02-Vina-Chico,Chico,660.0,False,False,False,Observation,Part of a nested/multi-completion well,Vina,WCR2023-000034,39.73168,-121.86499,Quarterly,True,178.87,180.67,460-559,,,,
+22N01E28J005M,22N01E28J005M,397317N1218649W003,02-Vina-Chico,Chico,948.0,False,False,False,Observation,Part of a nested/multi-completion well,Vina,WCR2023-000034,39.73168,-121.86499,Quarterly,True,178.89,179.79,740-800,,,,
+22N01E35E001M,22N01E35E001M,397182N1218432W001,02-Vina-Chico,Chico,656.0,False,False,False,Irrigation,Single Well,Vina,3876,39.7182,-121.8432,Hourly,False,182.33,183.97,101-109; 136-142; 160-173; 186-202; 230-236; 257-285; 294-313; 327-372,,,,
+22N02E18J001M,22N02E18J001M,397619N1217891W001,02-Vina-Chico,Chico,180.0,False,False,True,Residential,Single Well,Vina,92449,39.7619,-121.7891,Quarterly,False,279.34,280.14,,,,,
+22N02E30C002M,22N02E30C002M,397383N1217982W001,02-Vina-Chico,Chico,203.0,False,False,True,Observation,Single Well,Vina,WCR2001-008942,39.73827,-121.79816,Quarterly,False,243.63,245.13,131-141; 181-191,,,,
+CWSCH04,CWSCH04,397284N1218374W005,02-Vina-Chico,Chico,,False,False,False,Public Supply,Single Well,Vina,,39.72849,-121.83748,Tri-annually,False,215.0,215.0,,,,,
+CWSCH05,CWSCH05,397284N1218374W006,02-Vina-Chico,Chico,,False,False,False,Public Supply,Single Well,Vina,,39.72849,-121.83748,Tri-annually,False,218.0,221.5,,,,,
+CWSCH06,CWSCH06,397284N1218374W007,02-Vina-Chico,Chico,,False,False,False,Public Supply,Single Well,Vina,,39.72849,-121.83748,Tri-annually,False,182.0,182.0,,,,,
+20N01E10C002M,20N01E10C002M,396097N1218487W001,03-Vina-South,South,210.0,True,False,False,Irrigation,Single Well,Butte,2410,39.60965,-121.84876,Quarterly,False,127.35,128.35,20-120,,20,92,93.0
+20N02E09L001M,20N02E09L001M,396066N1217586W001,03-Vina-South,South,710.0,True,False,False,Irrigation,Single Well,Vina,1055,39.6066,-121.7586,Quarterly,False,139.33,143.83,460-710,,30,91,93.0
+20N02E24C001M,20N02E24C001M,395812N1217026W001,03-Vina-South,South,155.0,True,True,True,Observation,Part of a nested/multi-completion well,Vina,WCR1999-008136,39.5812,-121.7026,Hourly,True,157.75,159.65,124-134,,18,77,81.0
+21N01E21C001M,21N01E21C001M,396654N1218780W001,03-Vina-South,South,565.0,True,False,False,Irrigation,Single Well,Vina,65964,39.66547,-121.878,Quarterly,False,133.34,133.64,240-300; 448-508,,10,64,67.0
+21N02E18C003M,21N02E18C003M,396820N1217970W003,03-Vina-South,South,240.0,True,True,False,Observation,Part of a nested/multi-completion well,Vina,WCR2010-008171,39.682,-121.797,Hourly,True,189.07,191.15,130-140; 160-170; 190-200,,65,130,132.0
+21N02E26E005M,21N02E26E005M,396468N1217263W003,03-Vina-South,South,315.0,True,False,False,Observation,Part of a nested/multi-completion well,Vina,WCR2007-008015,39.6468,-121.7263,Hourly,True,182.26,184.44,265-275; 280-290,,36,95,97.0
+20N01E02H003M,20N01E02H003M,396158N1218221W001,03-Vina-South,South,201.0,False,True,False,Observation,Single Well,Vina,782029,39.61576,-121.82216,Hourly,False,132.34,133.79,70-80; 170-180,,,,
+20N02E06Q001M,20N02E06Q001M,396127N1217883W001,03-Vina-South,South,383.0,False,False,False,Irrigation,Single Well,Vina,2456,39.6127,-121.7883,Quarterly,False,137.63,138.13,10-44,,,,
+20N02E08C001M,20N02E08C001M,396069N1217736W002,03-Vina-South,South,660.0,False,False,False,Irrigation,Single Well,Vina,E0263129,39.6069,-121.77358,Quarterly,False,134.0,134.4,330-660,,,,
+20N02E08H003M,20N02E08H003M,396064N1217695W001,03-Vina-South,South,187.0,False,False,False,Residential,Single Well,Vina,705843,39.6064,-121.7695,Quarterly,False,132.33,133.63,,,,,
+20N02E09G001M,20N02E09G001M,396154N1217391W001,03-Vina-South,South,202.0,False,False,False,Observation,Single Well,Vina,782038,39.61546,-121.73913,Hourly,False,148.84,150.24,130-140; 170-180,,,,
+20N02E24C002M,20N02E24C002M,395812N1217026W002,03-Vina-South,South,390.0,False,False,False,Observation,Part of a nested/multi-completion well,Vina,WCR1999-008136,39.5812,-121.7026,Hourly,True,157.75,160.14,336-346; 367-377,,,,
+20N02E24C003M,20N02E24C003M,395812N1217026W003,03-Vina-South,South,520.0,False,False,False,Observation,Part of a nested/multi-completion well,Vina,WCR1999-008136,39.5812,-121.7026,Hourly,True,157.75,159.14,484-505,,,,
+20N03E31M001M,20N03E31M001M,395446N1216873W001,03-Vina-South,South,201.0,False,False,False,Observation,Single Well,Vina,782043,39.5446,-121.6873,Hourly,False,133.02,134.52,130-140; 170-180,,,,
+20N03E33L001M,20N03E33L001M,395435N1216466W001,03-Vina-South,South,101.0,False,False,False,Other,Single Well,Vina,,39.54357,-121.64667,Hourly,False,151.33,152.93,13-101,,,,
+21N01E10B003M,21N01E10B003M,396963N1218486W001,03-Vina-South,South,525.0,False,True,False,Irrigation,Single Well,Vina,13929,39.6963,-121.8486,Quarterly,False,170.33,170.73,320-360; 367-407; 483-503,,,,
+21N01E12D001M,21N01E12D001M,396932N1218231W001,03-Vina-South,South,600.0,False,False,False,Irrigation,Single Well,Vina,2676,39.69322,-121.82313,Quarterly,False,187.33,188.03,50-150,,,,
+21N01E12K001M,21N01E12K001M,396892N1218121W001,03-Vina-South,South,465.0,False,False,False,Irrigation,Single Well,Vina,48510,39.6892,-121.8121,Quarterly,False,189.33,189.83,,,,,
+21N01E13F001M,21N01E13F001M,396769N1218157W001,03-Vina-South,South,515.0,False,False,False,Irrigation,Single Well,Vina,126426,39.67685,-121.81567,Quarterly,False,177.33,177.53,93-204,,,,
+21N01E13L002M,21N01E13L002M,396735N1218144W001,03-Vina-South,South,771.0,False,False,False,Observation,Part of a nested/multi-completion well,Vina,WCR2010-008893,39.67348,-121.8144,Hourly,True,179.85,181.9,735-760,,,,
+21N01E13L003M,21N01E13L003M,396735N1218144W002,03-Vina-South,South,574.0,False,False,False,Observation,Part of a nested/multi-completion well,Vina,WCR2010-008893,39.67348,-121.8144,Hourly,True,179.85,181.99,540-560,,,,
+21N01E13L004M,21N01E13L004M,396735N1218144W003,03-Vina-South,South,353.0,False,True,False,Observation,Part of a nested/multi-completion well,Vina,WCR2010-008893,39.67348,-121.8144,Hourly,True,179.85,182.06,240-340,,,,
+21N01E14Q002M,21N01E14Q002M,396691N1218298W001,03-Vina-South,South,290.0,False,False,False,Irrigation,Single Well,Vina,265035,39.6691,-121.8298,Quarterly,False,167.13,167.63,,,,,
+21N01E25K001M,21N01E25K001M,396420N1218128W001,03-Vina-South,South,93.0,False,False,False,Residential,Single Well,Vina,211789,39.642,-121.8128,Quarterly,False,154.33,156.53,,,,,
+21N01E26K001M,21N01E26K001M,396454N1218313W001,03-Vina-South,South,462.0,False,False,False,Irrigation,Single Well,Vina,76269,39.6454,-121.8313,Quarterly,False,152.84,153.84,406-422,,,,
+21N01E27B001M,21N01E27B001M,396528N1218526W001,03-Vina-South,South,517.0,False,False,False,Irrigation,Single Well,Vina,,39.6528,-121.8526,Quarterly,False,149.34,150.34,24-517,,,,
+21N01E27D001M,21N01E27D001M,396511N1218607W001,03-Vina-South,South,112.0,False,True,False,Residential,Single Well,Vina,,39.6511,-121.8607,Quarterly,False,143.34,144.94,,,,,
+21N01E28F001M,21N01E28F001M,396490N1218726W001,03-Vina-South,South,173.0,False,False,False,Irrigation,Single Well,Vina,,39.649,-121.8726,Quarterly,False,142.35,144.25,,,,,
+21N02E18C001M,21N02E18C001M,396820N1217970W001,03-Vina-South,South,914.0,False,False,False,Observation,Part of a nested/multi-completion well,Vina,WCR2010-008171,39.682,-121.797,Hourly,True,189.07,191.56,770-780; 800-810; 830-840; 870-880,,,,
+21N02E18C002M,21N02E18C002M,396820N1217970W002,03-Vina-South,South,701.0,False,False,False,Observation,Part of a nested/multi-completion well,Vina,WCR2010-008171,39.682,-121.797,Hourly,True,189.07,191.42,360-370; 480-500; 610-620,,,,
+21N02E20P001M,21N02E20P001M,396568N1217818W001,03-Vina-South,South,238.0,False,False,False,Irrigation,Single Well,Vina,141490,39.6568,-121.7818,Quarterly,False,168.13,169.33,100-238,,,,
+21N02E26E003M,21N02E26E003M,396468N1217263W001,03-Vina-South,South,660.0,False,False,False,Observation,Part of a nested/multi-completion well,Vina,WCR2007-008015,39.6468,-121.7263,Hourly,True,182.27,184.97,610-620,,,,
+21N02E26E004M,21N02E26E004M,396468N1217263W002,03-Vina-South,South,518.0,False,False,False,Observation,Part of a nested/multi-completion well,Vina,WCR2007-008015,39.6468,-121.7263,Hourly,True,182.26,184.68,400-410; 430-440; 474-484,,,,
+21N02E26E006M,21N02E26E006M,396468N1217263W004,03-Vina-South,South,179.0,False,True,False,Observation,Part of a nested/multi-completion well,Vina,WCR2007-008015,39.6468,-121.7263,Hourly,True,182.26,184.28,105-115; 140-150,,,,
+21N02E30L001M,21N02E30L001M,396422N1217994W001,03-Vina-South,South,317.0,False,True,False,Residential,Single Well,Vina,2926,39.6422,-121.7994,Hourly,False,159.33,160.28,100-317,,,,
+21N02E32E001M,21N02E32E001M,396339N1217845W001,03-Vina-South,South,184.0,False,False,True,Irrigation,Single Well,Vina,211714,39.63383,-121.78447,Quarterly,False,157.33,158.13,62-92,,,,
+21N03E22C001M,21N03E22C001M,396653N1216299W001,03-Vina-South,South,123.0,False,False,False,Residential,Single Well,,114311X,39.66534,-121.62996,Quarterly,False,382.37,384.87,,,,,
+21N03E29J003M,21N03E29J003M,396454N1216588W001,03-Vina-South,South,515.0,False,True,False,Residential,Single Well,Vina,124543,39.6454,-121.6588,Quarterly,False,274.34,275.94,120-160; 180-240; 260-270; 286-350,,,,
+21N03E32B001M,21N03E32B001M,396396N1216634W001,03-Vina-South,South,57.0,False,False,True,Irrigation,Single Well,Vina,,39.63958,-121.66338,Hourly,False,238.43,242.33,13-57,,,,
