@@ -5,11 +5,9 @@ An interactive groundwater conditions dashboard for the Vina Subbasin (DWR Basin
 network** (`rms/2022_RMS_Network.shp`) and the **80-well monitoring universe**
 (`data/2026-05-02 Network - USE.xlsx`).
 
-The page is the same shape as
-[cosmo1007/vina-subbasin-dashboard](https://github.com/cosmo1007/vina-subbasin-dashboard)
-but uses the revised 2022 polygon boundaries (Chico dissolved into a single
-polygon per the GSA's reference figure) and surfaces every well in the 80-well
-network alongside the 17 wells designated 2022 GWL RMS in the GSP.
+The page uses the revised 2022 polygon boundaries per the GSA's reference figure 
+and surfaces every well in the 80-well network alongside the 17 wells designated 
+2022 GWL RMS in the GSP.
 
 ## What it shows
 
@@ -129,15 +127,6 @@ python3 scripts/fetch_dwr_data.py
 
 `fetch_dwr_data.py` regenerates both `wells-data.js` and `measurements-data.js`
 together so they always reference the same well roster.
-
-## Local development
-
-```bash
-bash scripts/serve.sh    # serves the worktree on http://localhost:8765
-```
-
-Open `http://localhost:8765/` in a browser. The dashboard is a static page; all
-data is embedded in `js/*-data.js` so there are no XHR calls and no CORS issues.
 
 ## GitHub Pages deployment
 
