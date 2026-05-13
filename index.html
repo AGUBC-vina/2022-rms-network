@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css">
     <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -85,6 +86,140 @@
             border-radius: 6px;
             margin-bottom: 20px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .tab-nav {
+            max-width: 1760px;
+            margin: 0 auto 20px auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 4px;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 12px 24px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+            transition: color 0.15s, border-color 0.15s;
+            font-family: inherit;
+        }
+
+        .tab-btn:hover {
+            color: #1e40af;
+        }
+
+        .tab-btn.active {
+            color: #1e40af;
+            border-bottom-color: #1e40af;
+        }
+
+        .tab-pane {
+            display: none;
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
+
+        .readme-content {
+            font-size: 15px;
+            line-height: 1.65;
+            color: #333;
+            max-width: 920px;
+        }
+
+        .readme-content h1 {
+            font-size: 28px;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .readme-content h2 {
+            font-size: 22px;
+            margin-top: 32px;
+            margin-bottom: 12px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .readme-content h3 {
+            font-size: 17px;
+            margin-top: 24px;
+            margin-bottom: 10px;
+        }
+
+        .readme-content p {
+            margin-bottom: 14px;
+        }
+
+        .readme-content ul, .readme-content ol {
+            margin-bottom: 14px;
+            padding-left: 28px;
+        }
+
+        .readme-content li {
+            margin-bottom: 6px;
+        }
+
+        .readme-content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 13px;
+            color: #c2410c;
+        }
+
+        .readme-content pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 14px 16px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin-bottom: 16px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .readme-content pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+        }
+
+        .readme-content table {
+            margin: 16px 0;
+        }
+
+        .readme-content th {
+            background: #f5f5f5;
+        }
+
+        .readme-content blockquote {
+            border-left: 4px solid #1e40af;
+            padding: 8px 14px;
+            background: #f0f5ff;
+            margin: 14px 0;
+            color: #555;
+        }
+
+        .readme-content a {
+            color: #1e40af;
+            text-decoration: underline;
+        }
+
+        .readme-content hr {
+            border: none;
+            border-top: 1px solid #eee;
+            margin: 24px 0;
         }
 
         section h2 {
@@ -394,7 +529,13 @@
         </div>
     </header>
 
+    <nav class="tab-nav">
+        <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+        <button class="tab-btn" data-tab="readme">README</button>
+    </nav>
+
     <div class="container">
+        <div class="tab-pane active" id="tab-dashboard">
         <section>
             <h2>5.2 Interactive Map</h2>
             <p class="section-intro">
@@ -469,6 +610,15 @@
                 <div class="empty-state">Click a polygon on the map above to view the representativeness comparison.</div>
             </div>
         </section>
+        </div>
+
+        <div class="tab-pane" id="tab-readme">
+            <section>
+                <div class="readme-content" id="readme-content">
+                    <div class="empty-state">Loading README&hellip;</div>
+                </div>
+            </section>
+        </div>
     </div>
 
     <footer>
@@ -480,5 +630,39 @@
     <script src="js/measurements-data.js"></script>
     <script src="js/polygons-data.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        (function () {
+            const buttons = document.querySelectorAll('.tab-btn');
+            const panes = document.querySelectorAll('.tab-pane');
+            let readmeLoaded = false;
+
+            function activate(name) {
+                buttons.forEach(btn => btn.classList.toggle('active', btn.dataset.tab === name));
+                panes.forEach(pane => pane.classList.toggle('active', pane.id === 'tab-' + name));
+                if (name === 'readme' && !readmeLoaded) loadReadme();
+                if (name === 'dashboard') {
+                    window.dispatchEvent(new Event('resize'));
+                }
+            }
+
+            function loadReadme() {
+                const target = document.getElementById('readme-content');
+                fetch('README.md', { cache: 'no-cache' })
+                    .then(r => {
+                        if (!r.ok) throw new Error('HTTP ' + r.status);
+                        return r.text();
+                    })
+                    .then(md => {
+                        target.innerHTML = marked.parse(md);
+                        readmeLoaded = true;
+                    })
+                    .catch(err => {
+                        target.innerHTML = '<div class="empty-state">Could not load README.md (' + err.message + '). View it on <a href="https://github.com/cosmo1007/2022-rms-network/blob/main/README.md" target="_blank" rel="noopener">GitHub</a>.</div>';
+                    });
+            }
+
+            buttons.forEach(btn => btn.addEventListener('click', () => activate(btn.dataset.tab)));
+        })();
+    </script>
 </body>
 </html>
