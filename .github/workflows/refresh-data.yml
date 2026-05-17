@@ -1,9 +1,11 @@
-name: Daily Data Refresh
+name: Scheduled Data Refresh
 
 on:
-  # Daily at 5am Pacific (noon UTC, after DWR's overnight processing).
   schedule:
-    - cron: '0 12 * * *'
+    # May–Aug (irrigation season, water levels stable): monthly on the 1st at 12:00 UTC.
+    - cron: '0 12 1 5,6,7,8 *'
+    # Sep–Apr (recharge/recovery season): weekly on Mondays at 12:00 UTC.
+    - cron: '0 12 * 9,10,11,12,1,2,3,4 1'
   # Manual trigger from the Actions tab.
   workflow_dispatch:
 
