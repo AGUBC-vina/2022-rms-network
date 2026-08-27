@@ -206,10 +206,14 @@ function initializeWells() {
 function initMap() {
     map = L.map('map').setView([39.73, -121.85], 11);
 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-        subdomains: 'abcd',
-        maxZoom: 19,
+    // Esri Light Gray Canvas (base + label layers). Replaced CARTO 2026-08-26:
+    // CARTO now stamps "API KEY REQUIRED" across every tile served without a key.
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri &mdash; Esri, HERE, Garmin, USGS, NGA',
+        maxZoom: 19, maxNativeZoom: 16,
+    }).addTo(map);
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}', {
+        maxZoom: 19, maxNativeZoom: 16,
     }).addTo(map);
 
     const sg = buildSiteGroups();
